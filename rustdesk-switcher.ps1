@@ -1,7 +1,9 @@
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-# ---------- dark theme colors ----------
+param(
+  [string]$AppData = $env:APPDATA
+)
 function Get-ColorFromHex {
   param([string]$hex)
   $hex = $hex.TrimStart('#')
@@ -25,7 +27,7 @@ $profiles = @(
 )
 
 $configPaths = @(
-  "$env:APPDATA\RustDesk\config\RustDesk2.toml",
+  "$AppData\RustDesk\config\RustDesk2.toml",
   "C:\Windows\ServiceProfiles\LocalService\AppData\Roaming\RustDesk\config\RustDesk2.toml"
 )
 
@@ -33,7 +35,7 @@ $configPaths = @(
 function Expand-Path {
   param($p)
   if ($p -like '%APPDATA%*') {
-    $p = $p -replace '%APPDATA%', $env:APPDATA
+    $p = $p -replace '%APPDATA%', $AppData
   }
   return $p
 }
