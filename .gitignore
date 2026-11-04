@@ -1,5 +1,3 @@
 target/
 *.exe
-*.ps1
 .vscode/
-*.ps1
